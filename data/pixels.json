@@ -1,0 +1,37 @@
+[
+  {
+    "id": "pix_sample_meta",
+    "name": "Meta Pixel (Facebook & Instagram Ads)",
+    "type": "meta_pixel",
+    "trackingId": "123456789012345",
+    "placement": "head",
+    "active": false,
+    "code": "<!-- Meta Pixel Code -->\n<script>\n!function(f,b,e,v,n,t,s)\n{if(f.fbq)return;n=f.fbq=function(){n.callMethod?\nn.callMethod.apply(n,arguments):n.queue.push(arguments)};\nif(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';\nn.queue=[];t=b.createElement(e);t.async=!0;\nt.src=v;s=b.getElementsByTagName(e)[0];\ns.parentNode.insertBefore(t,s)}(window, document,'script',\n'https://connect.facebook.net/en_US/fbevents.js');\nfbq('init', '123456789012345');\nfbq('track', 'PageView');\n</script>\n<noscript><img height=\"1\" width=\"1\" style=\"display:none\"\nsrc=\"https://www.facebook.com/tr?id=123456789012345&ev=PageView&noscript=1\"\n/></noscript>\n<!-- End Meta Pixel Code -->",
+    "createdAt": "2026-10-11T12:00:00.000Z",
+    "notes": "Базовый пресет Meta Pixel. Замените ID на ваш реальный и включите переключатель.",
+    "updatedAt": "2026-10-11T09:13:01.287Z"
+  },
+  {
+    "id": "pix_sample_ga4",
+    "name": "Google Analytics 4 (GA4)",
+    "type": "google_analytics",
+    "trackingId": "G-DEMO123456",
+    "placement": "head",
+    "active": false,
+    "code": "<!-- Google tag (gtag.js) -->\n<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-DEMO123456\"></script>\n<script>\n  window.dataLayer = window.dataLayer || [];\n  function gtag(){dataLayer.push(arguments);}\n  gtag('js', new Date());\n  gtag('config', 'G-DEMO123456');\n</script>",
+    "createdAt": "2026-10-11T12:00:00.000Z",
+    "notes": "Базовый пресет GA4 gtag.js. Замените ID на ваш идентификатор потока данных.",
+    "updatedAt": "2026-10-11T09:12:58.883Z"
+  },
+  {
+    "id": "pix_sample_yandex",
+    "name": "Яндекс Метрика (Вебвизор)",
+    "type": "yandex_metrika",
+    "trackingId": "12345678",
+    "placement": "head",
+    "active": false,
+    "code": "<!-- Yandex.Metrika counter -->\n<script type=\"text/javascript\" >\n   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};\n   m[i].l=1*new Date();\n   for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}\n   k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})\n   (window, document, \"script\", \"https://mc.yandex.ru/metrika/tag.js\", \"ym\");\n\n   ym(12345678, \"init\", {\n        clickmap:true,\n        trackLinks:true,\n        accurateTrackBounce:true,\n        webvisor:true\n   });\n</script>\n<noscript><div><img src=\"https://mc.yandex.ru/watch/12345678\" style=\"position:absolute; left:-9999px;\" alt=\"\" /></div></noscript>\n<!-- /Yandex.Metrika counter -->",
+    "createdAt": "2026-10-11T12:00:00.000Z",
+    "notes": "Базовый пресет Яндекс Метрики с включенным Вебвизором и картой кликов."
+  }
+]

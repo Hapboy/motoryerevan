@@ -1,0 +1,90 @@
+{
+  "event": {
+    "title": "ISHOME Live in Yerevan 24 oct | TICKETS",
+    "shortTitle": "ISHOME Live in Yerevan",
+    "subtitle": "140 crew × PROUN present",
+    "dateFormatted": "24 Октября 2026",
+    "dayOfWeek": "Суббота",
+    "time": "17:00",
+    "targetDate": "2026-10-24T17:00:00+04:00",
+    "type": "Day-time Gathering / Live Electronics & Audiovisual Show",
+    "tagline": "Саб-бас давление, лайв-электроника и аудиовизуальный перформанс в индустриальном пространстве MOTOR",
+    "description": "24 октября 140 crew и PROUN объединяются в MOTOR для дневного события на стыке саб-баса и лайв-электроники.\n\nХедлайнер программы — ISHOME (Мирабелла Карьянова): самобытный голос современной электроники, чья траектория охватывает Berghain, Mutabor, Boiler Room, NTS и культовые релизы на лейбле Нины Кравиц «трип» под альтер-эго SHADOWAX. В культовых релизах Eva и Confession Мирабелла сплетает вязкие ритмы, даб-эмбиент и кинематографичный гэридж.\n\nВ лайнапе ключевые представители ереванского андерграунда: SHHAU, VAZGEN live, YCROW, ANGELIC WAVES live.",
+    "posterUrl": "https://esora.app/img/unsafe/1200x0/filters:no_upscale():format(jpeg)/events/081bda9e-5cda-4273-9077-b1c22badc92b/081b7800fd10a83be0aa1dc961ae05ae.jpg",
+    "prices": [
+      { "name": "1-я волна", "price": "4 000 AMD", "status": "Доступно", "badge": "Early Bird" },
+      { "name": "2-я волна", "price": "6 000 AMD", "status": "Скоро", "badge": "Standard" },
+      { "name": "На входе", "price": "8 000 AMD", "status": "В день события", "badge": "On Door" }
+    ],
+    "lineup": [
+      { "name": "ISHOME live", "role": "Headliner (Shadowax / Trip / Mutabor / Berghain)", "desc": "Viscous rhythms, dub ambient, and cinematic garage with tactile hardware" },
+      { "name": "SHHAU", "role": "Sound artist & composer", "desc": "Extensive catalog quietly woven into Yerevan electronic fabric" },
+      { "name": "VAZGEN live", "role": "Multi-instrumentalist", "desc": "High-octane live modular hardware performance" },
+      { "name": "YCROW", "role": "Selector / Producer", "desc": "Deconstructed broken beat, drum & bass and leftfield bass" },
+      { "name": "ANGELIC WAVES live", "role": "Live performer", "desc": "Sharp tension and emotive raw frequencies" }
+    ],
+    "ticketPartners": [
+      {
+        "id": "frisson",
+        "name": "Frisson",
+        "badge": "Официальный партнер",
+        "url": "https://frisson.events/events/1otiK6-ishome-live-in-yerevan",
+        "priceFrom": "от 4 000 AMD",
+        "icon": "frisson",
+        "color": "#ff3366",
+        "popular": true
+      },
+      {
+        "id": "esora",
+        "name": "Esora",
+        "badge": "Быстрая покупка",
+        "url": "https://esora.app/ru/events/140-crew-proun-081bda9e",
+        "priceFrom": "от 4 000 AMD",
+        "icon": "esora",
+        "color": "#6366f1",
+        "popular": false
+      },
+      {
+        "id": "show4me",
+        "name": "Show4me",
+        "badge": "Международные карты",
+        "url": "https://show4me.com/events/event-1791632744",
+        "priceFrom": "от 4 000 AMD",
+        "icon": "show4me",
+        "color": "#10b981",
+        "popular": false
+      }
+    ]
+  },
+  "venue": {
+    "name": "MOTOR YEREVAN",
+    "shortName": "MOTOR",
+    "tagline": "Industrial Arts & Electronic Music Venue",
+    "address": "28 Marksi poxoc, Yerevan 0018, Armenia",
+    "city": "Yerevan",
+    "country": "Armenia",
+    "coordinates": {
+      "lat": 40.171255,
+      "lng": 44.511984
+    },
+    "plusCode": "5GC6+Q8 Yerevan, Armenia",
+    "googleMapsUrl": "https://www.google.com/maps/search/?api=1&query=Google&query_place_id=ChIJ___jLF-8akARl-oetTLb_LE",
+    "yandexMapsUrl": "https://yandex.com/maps/?text=40.171255,44.511984",
+    "soundSystem": "Custom High-Pressure Acoustic System with precision Sub-Bass arrays",
+    "capacity": "800+ гостей",
+    "features": [
+      "Индустриальная архитектура с акустической обработкой",
+      "Мощный саб-басовый массив звука клубного класса",
+      "Световые инсталляции и проекционный сетап",
+      "Бар с авторскими коктейлями и безалкогольной картой",
+      "Chillout & smoking open-air зоны",
+      "Удобный подъезд в центре Еревана"
+    ],
+    "contacts": {
+      "instagram": "https://instagram.com/140_crew",
+      "organizerInstagram": "https://www.instagram.com/proun.movement",
+      "telegram": "https://t.me/esoraapp",
+      "linktree": "https://tr.ee/gIYGRcNOFH"
+    }
+  }
+}

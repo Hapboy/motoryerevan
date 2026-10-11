@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOTOR YEREVAN // Админ-панель (Пиксели и Аналитика)</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body>
+  <!-- PIN Authentication Screen -->
+  <div class="auth-screen" id="authScreen">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <span class="auth-brand-motor">MOTOR</span>
+        <span class="auth-brand-sub">YEREVAN</span>
+      </div>
+      <h2 class="auth-title">ВХОД В АДМИН-ПАНЕЛЬ</h2>
+      <p class="auth-desc">Управление аналитическими пикселями и скриптами</p>
+      
+      <form id="authForm" class="auth-form">
+        <div class="form-group">
+          <label for="pinInput" class="form-label">Пароль доступа (PIN)</label>
+          <input type="password" id="pinInput" class="form-control text-center" placeholder="Введите пароль (по умолч: admin)" required autofocus>
+          <span class="form-help">Стандартный пароль: <code>admin</code></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">ВОЙТИ В ПАНЕЛЬ</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Main Admin Layout -->
+  <div class="admin-layout" id="adminApp" style="display: none;">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="sidebar-brand">
+        <div class="brand-box">
+          <span class="brand-m">MOTOR</span>
+          <span class="brand-y">YEREVAN</span>
+        </div>
+        <span class="admin-badge">ADMIN CORE</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <button class="nav-tab active" data-tab="pixelsTab">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+          Пиксели и Скрипты
+          <span class="pill-count" id="navPixelCount">0</span>
+        </button>
+        <button class="nav-tab" data-tab="eventTab">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          Мероприятие и Билеты
+        </button>
+        <button class="nav-tab" data-tab="previewTab">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          Инспекция внедрения
+        </button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <a href="/" target="_blank" class="sidebar-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+          Открыть сайт в новой вкладке
+        </a>
+        <button id="logoutBtn" class="logout-btn">Выйти</button>
+      </div>
+    </aside>
+
+    <!-- Content Area -->
+    <main class="admin-main">
+      <!-- Top Bar -->
+      <header class="admin-topbar">
+        <div class="topbar-title-wrap">
+          <h1 class="topbar-title">УПРАВЛЕНИЕ ПИКСЕЛЯМИ И АНАЛИТИКОЙ</h1>
+          <span class="topbar-sub">MOTOR YEREVAN // ISHOME Live 24 Oct</span>
+        </div>
+        <div class="topbar-actions">
+          <button class="btn btn-outline" id="refreshBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+            Обновить
+          </button>
+          <button class="btn btn-primary add-pixel-btn" id="openAddModalBtn">
+            <span class="btn-plus-icon">+</span>
+            <span>ДОБАВИТЬ ПИКСЕЛЬ</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- TAB 1: PIXELS -->
+      <div class="tab-pane active" id="pixelsTab">
+        <!-- Overview Stats -->
+        <div class="stats-row">
+          <div class="stat-card">
+            <span class="sc-label">ВСЕГО СКРИПТОВ</span>
+            <span class="sc-val" id="statTotal">0</span>
+            <span class="sc-note">Неограниченное кол-во</span>
+          </div>
+          <div class="stat-card">
+            <span class="sc-label">АКТИВНЫХ ПИКСЕЛЕЙ</span>
+            <span class="sc-val active-val" id="statActive">0</span>
+            <span class="sc-note">Внедряются на сайт</span>
+          </div>
+          <div class="stat-card">
+            <span class="sc-label">ОТКЛЮЧЕННЫХ</span>
+            <span class="sc-val disabled-val" id="statDisabled">0</span>
+            <span class="sc-note">На паузе</span>
+          </div>
+          <div class="stat-card action-card" id="cardQuickAdd">
+            <div class="action-card-inner">
+              <span class="ac-plus">+</span>
+              <span class="ac-text">Добавить новый код аналитики</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pixels List Header & Quick Filter -->
+        <div class="list-controls">
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="searchPixels" placeholder="Поиск по названию или ID...">
+          </div>
+          <div class="filter-pills">
+            <button class="filter-pill active" data-filter="all">Все</button>
+            <button class="filter-pill" data-filter="active">Активные</button>
+            <button class="filter-pill" data-filter="disabled">Отключенные</button>
+            <button class="filter-pill" data-filter="google">Google</button>
+            <button class="filter-pill" data-filter="meta">Meta</button>
+            <button class="filter-pill" data-filter="yandex">Yandex</button>
+          </div>
+        </div>
+
+        <!-- Pixels Container -->
+        <div class="pixels-grid" id="pixelsContainer">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- TAB 2: EVENT & TICKET SETTINGS -->
+      <div class="tab-pane" id="eventTab">
+        <div class="settings-card">
+          <h3 class="card-heading">Параметры ближайшего мероприятия</h3>
+          <p class="card-desc">Здесь можно оперативно скорректировать данные события, цены или ссылки партнеров</p>
+          
+          <form id="eventSettingsForm">
+            <div class="form-row">
+              <div class="form-group flex-1">
+                <label class="form-label">Название мероприятия</label>
+                <input type="text" id="eventTitle" class="form-control" value="ISHOME Live in Yerevan 24 oct | TICKETS">
+              </div>
+              <div class="form-group flex-1">
+                <label class="form-label">Дата и день</label>
+                <input type="text" id="eventDate" class="form-control" value="24 Октября 2026 // Суббота 17:00">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Адрес локации площадки</label>
+              <input type="text" id="venueAddress" class="form-control" value="28 Marksi poxoc, Yerevan 0018, Armenia">
+            </div>
+
+            <h4 class="sub-heading">Ссылки на билетных партнеров (Linktree)</h4>
+            
+            <div class="form-group">
+              <label class="form-label">Frisson Events URL</label>
+              <input type="url" id="linkFrisson" class="form-control font-mono" value="https://frisson.events/events/1otiK6-ishome-live-in-yerevan">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Esora App URL</label>
+              <input type="url" id="linkEsora" class="form-control font-mono" value="https://esora.app/ru/events/140-crew-proun-081bda9e">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Show4me URL</label>
+              <input type="url" id="linkShow4me" class="form-control font-mono" value="https://show4me.com/events/event-1791632744">
+            </div>
+
+            <button type="submit" class="btn btn-primary">СОХРАНИТЬ ИЗМЕНЕНИЯ</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 3: INJECTION INSPECTION -->
+      <div class="tab-pane" id="previewTab">
+        <div class="settings-card">
+          <h3 class="card-heading">Диагностика внедрения кода на сайте</h3>
+          <p class="card-desc">
+            Все активные пиксели динамически вставляются сервером при отдаче страницы <code>/</code> клиенту в теги <code>&lt;head&gt;</code> или <code>&lt;body&gt;</code>.
+          </p>
+
+          <div class="code-preview-block">
+            <div class="code-preview-header">
+              <span>Сгенерированный блок &lt;head&gt; (Активные теги)</span>
+              <button class="btn btn-sm btn-outline" id="copyHeadCodeBtn">Копировать</button>
+            </div>
+            <pre class="code-box" id="injectedHeadCode">Загрузка...</pre>
+          </div>
+
+          <div class="code-preview-block mt-4">
+            <div class="code-preview-header">
+              <span>Сгенерированный блок &lt;body&gt; (Активные теги)</span>
+              <button class="btn btn-sm btn-outline" id="copyBodyCodeBtn">Копировать</button>
+            </div>
+            <pre class="code-box" id="injectedBodyCode">Загрузка...</pre>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ADD / EDIT PIXEL MODAL -->
+  <div class="modal-backdrop" id="pixelModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="modal-tag">// КОНФИГУРАТОР</span>
+          <h3 class="modal-title" id="modalTitle">ДОБАВИТЬ ПИКСЕЛЬ / СКРИПТ</h3>
+        </div>
+        <button class="modal-close-btn" id="closeModalBtn">&times;</button>
+      </div>
+
+      <form id="pixelForm" class="modal-body">
+        <input type="hidden" id="editPixelId" value="">
+
+        <!-- Preset Type Selection -->
+        <div class="form-group">
+          <label class="form-label">Тип системы / Пресет</label>
+          <div class="type-selector-grid">
+            <label class="type-opt">
+              <input type="radio" name="pixelType" value="meta_pixel" checked>
+              <div class="type-opt-card">
+                <span class="type-icon meta-icon">M</span>
+                <span class="type-name">Meta Pixel</span>
+                <span class="type-hint">Facebook / Instagram</span>
+              </div>
+            </label>
+
+            <label class="type-opt">
+              <input type="radio" name="pixelType" value="google_analytics">
+              <div class="type-opt-card">
+                <span class="type-icon ga-icon">G</span>
+                <span class="type-name">Google Analytics 4</span>
+                <span class="type-hint">gtag.js (G-XXXX)</span>
+              </div>
+            </label>
+
+            <label class="type-opt">
+              <input type="radio" name="pixelType" value="google_tag_manager">
+              <div class="type-opt-card">
+                <span class="type-icon gtm-icon">T</span>
+                <span class="type-name">Google Tag Manager</span>
+                <span class="type-hint">GTM-XXXXXXX</span>
+              </div>
+            </label>
+
+            <label class="type-opt">
+              <input type="radio" name="pixelType" value="yandex_metrika">
+              <div class="type-opt-card">
+                <span class="type-icon ya-icon">Я</span>
+                <span class="type-name">Яндекс Метрика</span>
+                <span class="type-hint">Счетчик (Номер)</span>
+              </div>
+            </label>
+
+            <label class="type-opt">
+              <input type="radio" name="pixelType" value="tiktok_pixel">
+              <div class="type-opt-card">
+                <span class="type-icon tt-icon">Tik</span>
+                <span class="type-name">TikTok Pixel</span>
+                <span class="type-hint">TikTok Ads</span>
+              </div>
+            </label>
+
+            <label class="type-opt">
+              <input type="radio" name="pixelType" value="custom">
+              <div class="type-opt-card">
+                <span class="type-icon custom-icon">&lt;/&gt;</span>
+                <span class="type-name">Произвольный код</span>
+                <span class="type-hint">Любой HTML / JS</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Name -->
+        <div class="form-group">
+          <label for="pixelName" class="form-label">Название пикселя / Назначение *</label>
+          <input type="text" id="pixelName" class="form-control" placeholder="Например: Основной Meta Pixel или GA4 Ретаргетинг" required>
+        </div>
+
+        <!-- Tracking ID (for presets) -->
+        <div class="form-group" id="trackingIdGroup">
+          <label for="trackingId" class="form-label" id="trackingIdLabel">Идентификатор (ID) *</label>
+          <input type="text" id="trackingId" class="form-control font-mono" placeholder="Например: 123456789012345 или G-ABC123XYZ">
+          <span class="form-help" id="trackingIdHelp">Введите только ID. Полный скрипт сгенерируется автоматически ниже.</span>
+        </div>
+
+        <!-- Placement -->
+        <div class="form-row">
+          <div class="form-group flex-1">
+            <label class="form-label">Место вставки в HTML</label>
+            <select id="pixelPlacement" class="form-control">
+              <option value="head">&lt;head&gt; (Рекомендуется для GA4, Meta, GTM)</option>
+              <option value="body">&lt;body&gt; (Для счетчиков внизу или noscript блоков)</option>
+            </select>
+          </div>
+          <div class="form-group flex-1">
+            <label class="form-label">Статус при создании</label>
+            <select id="pixelActive" class="form-control">
+              <option value="true">🟢 Активен (включить сразу)</option>
+              <option value="false">⚪ Отключен (сохранить как черновик)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Code Area -->
+        <div class="form-group">
+          <div class="flex-between">
+            <label for="pixelCode" class="form-label">Скрипт / HTML Код *</label>
+            <button type="button" class="btn-text" id="regenerateCodeBtn">Сгенерировать по ID</button>
+          </div>
+          <textarea id="pixelCode" class="form-control code-editor font-mono" rows="6" placeholder="<!-- Код пикселя <script>...</script> -->" required></textarea>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group">
+          <label for="pixelNotes" class="form-label">Заметка / Примечание (необязательно)</label>
+          <input type="text" id="pixelNotes" class="form-control" placeholder="Например: Рекламная кампания во ВКонтакте / Инстаграм">
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="cancelModalBtn">Отмена</button>
+          <button type="submit" class="btn btn-primary" id="savePixelBtn">СОХРАНИТЬ ПИКСЕЛЬ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div class="toast-container" id="adminToastContainer"></div>
+
+  <script src="/admin/admin.js"></script>
+</body>
+</html>
